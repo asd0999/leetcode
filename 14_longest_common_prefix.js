@@ -38,10 +38,16 @@ var longestCommonPrefix = function(strs) {
 // check :
 console.log(
     "Common prefix: ",
-    longestCommonPrefix(["flower", "flow", "flight"])
+    longestCommonPrefix(["flower", "flow", "flight"]),
+    "\n"
 );
 console.log(
     "Common prefix: ",
-    longestCommonPrefix(["flower", "flow", "flop", "flight", "fast"])
+    longestCommonPrefix(["flower", "flow", "flop", "flight", "fast"]),
+    "\n"
 );
-console.log("Common prefix: ", longestCommonPrefix(["dog", "racecar", "car"]));
+console.log(
+    "Common prefix: ",
+    longestCommonPrefix(["dog", "racecar", "car"]),
+    "\n"
+);
