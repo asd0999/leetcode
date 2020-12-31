@@ -12,38 +12,38 @@ const complement = {
 };
 
 var isValid = function(s) {
-    let openParenthesis = [];
-    let lastOpenParenthesis = "";
-    let parenthesis = s.split("");
+    let openParentheses = [];
+    let lastOpenParentheses = "";
+    let parentheses = s.split("");
     // console.log(s);
-    // console.log(parenthesis);
-    for (i = 0; i < parenthesis.length; i++) {
+    // console.log(parentheses);
+    for (i = 0; i < parentheses.length; i++) {
         // if first para is a close para
-        if (i == 0 && close.includes(parenthesis[i])) {
+        if (i == 0 && close.includes(parentheses[i])) {
             return false;
         }
 
-        if (open.includes(parenthesis[i])) {
-            openParenthesis.push(parenthesis[i]);
-            lastOpenParenthesis = openParenthesis[openParenthesis.length - 1];
-            // console.log(openParenthesis, "last open: ", lastOpenParenthesis);
+        if (open.includes(parentheses[i])) {
+            openParentheses.push(parentheses[i]);
+            lastOpenParentheses = openParentheses[openParentheses.length - 1];
+            // console.log(openParentheses, "last open: ", lastOpenParentheses);
         } else {
             // console.log("here");
-            // console.log(lastOpenParenthesis);
-            // console.log(complement[lastOpenParenthesis]);
-            if (parenthesis[i] == complement[lastOpenParenthesis]) {
-                // console.log("found complement closing: ", parenthesis[i]);
-                openParenthesis.pop();
-                // console.log(openParenthesis);
-                lastOpenParenthesis = openParenthesis[openParenthesis.length - 1];
-                // console.log(openParenthesis, "last open: ", lastOpenParenthesis);
+            // console.log(lastOpenParentheses);
+            // console.log(complement[lastOpenParentheses]);
+            if (parentheses[i] == complement[lastOpenParentheses]) {
+                // console.log("found complement closing: ", parentheses[i]);
+                openParentheses.pop();
+                // console.log(openParentheses);
+                lastOpenParentheses = openParentheses[openParentheses.length - 1];
+                // console.log(openParentheses, "last open: ", lastOpenParentheses);
             } else {
                 return false;
             }
         }
     }
 
-    return lastOpenParenthesis ? false : true;
+    return lastOpenParentheses ? false : true;
 };
 
 // check :
