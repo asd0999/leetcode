@@ -3,29 +3,21 @@
  * @return {number}
  */
 var reverse = function(x) {
-    let negative = false;
-    let str = "";
-
-    // if x == 0
-    if (x == 0) return x;
-
+    let m = 1;
     if (x < 0) {
-        //if x is a nagative number
-        negative = true;
-        let cleanStr = x.toString().split("-");
-        str = cleanStr[1].split("").reverse().join("");
-    } else {
-        // if x is a positive number
-        str = x.toString().split("").reverse().join("");
+        m = -1;
+        x = Math.abs(x);
+    }
+    let soln = 0;
+
+    while (x > 0) {
+        let rem = x % 10;
+        x = Math.floor(x / 10);
+        soln = soln * 10 + rem;
     }
 
-    let n = parseInt(str);
-
-    //constraint
-    if (n < Math.pow(-2, 31) || n > Math.pow(2, 31) - 1) return 0;
-
-    negative ? (n *= -1) : n;
-    return n;
+    soln *= m;
+    return soln;
 };
 
 // check :
@@ -34,3 +26,20 @@ console.log(reverse(-123));
 console.log(reverse(21));
 console.log(reverse(0));
 console.log(reverse(1534236469));
+
+/*
+123
+rem = 3
+x = 12
+soln = 3
+
+12
+rem = 2
+x = 1
+soln = 30 + 2 = 32
+
+1
+rem = 1
+x = 0
+soln = 320 + 1 = 321
+*/
