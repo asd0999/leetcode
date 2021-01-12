@@ -31,6 +31,7 @@ console.log(reverse(0));
 console.log(reverse(1534236469));
 
 /*
+explanation
 123
 rem = 3
 x = 12
