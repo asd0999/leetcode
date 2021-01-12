@@ -17,6 +17,9 @@ var reverse = function(x) {
     }
 
     soln *= m;
+
+    if (soln < Math.pow(-2, 31) || soln > Math.pow(2, 31) - 1) return 0;
+
     return soln;
 };
 
