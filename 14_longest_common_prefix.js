@@ -3,36 +3,18 @@
  * @return {string}
  */
 var longestCommonPrefix = function(strs) {
-    console.log(strs);
-    let arr = strs.splice(0, 1);
-    let commonPrefix = "";
-    let currentLetter = strs[0][0];
-    for (let s = 0; s < strs.length; s++) {
-        if (s == 0) {
-            let tempArr = strs.slice(0, 1);
-            arr.push(tempArr[0]);
-        } else {
-            arr = [];
-            arr.push(commonPrefix);
-            arr.push(strs[s]);
-        }
-        console.log(arr);
-        commonPrefix = "";
+    let prefix = "";
+    if (strs === null || strs.length === 0) return prefix;
 
-        for (let i = 0; i < arr[0].length; i++) {
-            if (arr[0][i] == arr[1][i]) {
-                commonPrefix += arr[0][i];
-                console.log(currentLetter, commonPrefix);
-                currentLetter = arr[0][i + 1];
-            } else {
-                console.log(currentLetter);
-                currentLetter = arr[0][0];
-                break;
-            }
+    for (let i = 0; i < strs[0].length; i++) {
+        let char = strs[0][i];
+        for (let j = 1; j < strs.length; j++) {
+            if (char !== strs[j][i]) return prefix;
         }
+        prefix += char;
     }
 
-    return commonPrefix;
+    return prefix;
 };
 
 // check :
