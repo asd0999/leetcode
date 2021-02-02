@@ -1,22 +1,38 @@
 function climbingLeaderboard(scores, alice) {
-    let set_scores = [...new Set(scores)];
-    let unique_scores = [];
-    for (let score of set_scores) {
-        unique_scores.push(score);
+    let result = [];
+    let uniqueScores = [...new Set(scores)];
+    for (const score of alice) {
+        if (score >= uniqueScores[0]) {
+            result.push(1);
+        } else if (score < uniqueScores[uniqueScores.length - 1]) {
+            result.push(uniqueScores.length + 1);
+        } else {
+            result.push(rankBinarySearch(score, uniqueScores));
+        }
     }
-    console.log(unique_scores);
-    let ranks = [];
-    alice.forEach((item) => {
-        let curr_rank;
-        unique_scores.push(item);
-        unique_scores.sort((a, b) => b - a);
-        console.log(unique_scores);
-        curr_rank = unique_scores.findIndex((rank) => rank == item);
-        ranks.push(curr_rank + 1);
-        unique_scores.splice(curr_rank, 1);
-        console.log(ranks);
-    });
-    return ranks;
+    return result;
+}
+
+function rankBinarySearch(score, uniqueScores) {
+    let start = 0;
+    let end = uniqueScores.length - 1;
+    while (true) {
+        let mid = Math.floor((start + end) / 2);
+        // base cases
+        if (uniqueScores[mid] === score) {
+            return mid + 1;
+        } else if (uniqueScores[mid] > score && uniqueScores[mid + 1] < score) {
+            return mid + 2;
+        } else if (uniqueScores[mid] < score && uniqueScores[mid - 1 > score]) {
+            return mid - 1;
+        }
+        // recursion
+        if (score < uniqueScores[mid]) {
+            start = mid + 1;
+        } else {
+            end = mid - 1;
+        }
+    }
 }
 
 console.log(
