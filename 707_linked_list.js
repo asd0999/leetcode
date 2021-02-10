@@ -30,6 +30,60 @@ class LinkedList {
         this.size++;
         console.log(this.head);
     }
+
+    addAtTail(val) {
+        let newNode = new Node(val);
+        if (this.head === null) {
+            this.head = newNode;
+        } else {
+            let cur = this.head;
+            while (cur.next !== null) {
+                cur = cur.next;
+            }
+            cur.next = newNode;
+        }
+        this.size++;
+        console.log(this.head);
+    }
+
+    addAtIndex(index, val) {
+        if (index < 0 || index > this.size) return;
+        if (index === 0) {
+            this.addAtHead(val)
+            return;
+        }
+        if (index === this.size) {
+            this.addAtTail(val);
+            return;
+        }
+        let newNode = new Node(val);
+        let cur = this.head;
+        for (let i = 0; i < index - 1; i++) {
+            cur = cur.next;
+        }
+        newNode.next = cur.next;
+        cur.next = newNode;
+        this.size++;
+        console.log(this.head);
+        return cur.val;
+    }
+
+    deleteAtIndex(index) {
+        if (index < 0 || index >= this.size) return;
+        if (index === 0) {
+            this.head = this.head.next;
+            return;
+        }
+
+        let cur = this.head;
+        for (let i = 0; i < index - 1; i++) {
+            cur = cur.next;
+        }
+        cur.next = cur.next.next;
+        this.size--;
+        console.log(this.head);
+
+    }
 }
 
 let list = new LinkedList();
@@ -39,7 +93,20 @@ list.addAtHead(1);
 console.log(list.get(0));
 console.log(list.get(1));
 list.addAtHead(3);
+console.log(list.get(0));
+list.addAtTail(5);
+list.deleteAtIndex(1);
+list.addAtIndex(1, 4);
 console.log(list.get(1));
+list.addAtIndex(0, 2);
+list.addAtHead(1);
+console.log(list.get(0));
+console.log(list.get(1));
+console.log(list.get(2));
+console.log(list.get(3));
+console.log(list.get(4));
+console.log(list.get(5));
+
 
 ////////leetcode solution////////
 // class Node {
