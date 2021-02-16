@@ -48,13 +48,23 @@ var countAndSay = function(n) {
     return answer;
 };
 
+//regex solution
+var countAndSay2 = function(n) {
+    a = "1";
+    while (n > 1) {
+        a = a.replace(/(\d)\1*/g, (m, v) => `${m.length}${v}`);
+        n--;
+    }
+    return a;
+};
+
 // check :
-console.log(countAndSay(1));
-console.log(countAndSay(2));
-console.log(countAndSay(3));
-console.log(countAndSay(4));
-console.log(countAndSay(5));
-console.log(countAndSay(6));
-console.log(countAndSay(7));
-console.log(countAndSay(8));
-console.log(countAndSay(9));
+console.log(countAndSay2(1));
+console.log(countAndSay2(2));
+console.log(countAndSay2(3));
+console.log(countAndSay2(4));
+console.log(countAndSay2(5));
+console.log(countAndSay2(6));
+console.log(countAndSay2(7));
+console.log(countAndSay2(8));
+console.log(countAndSay2(9));
