@@ -18,15 +18,15 @@ var maxSubArray = function(nums) {
         if (localMax > globalMax) {
             globalMax = localMax;
         }
-        console.log("localMax", localMax);
+        console.log("localMax", localMax, "globalMax", globalMax);
     }
     console.log(globalMax);
     return globalMax;
 };
 
 // check :
-// console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
-console.log(maxSubArray([-2, -1]));
+console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
+// console.log(maxSubArray([-2, -1]));
 // console.log(maxSubArray([1]));
 // console.log(maxSubArray([0]));
 // console.log(maxSubArray([-1]));
