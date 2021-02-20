@@ -11,6 +11,7 @@ var mySqrt = function(x) {
     let mid = 0;
 
     while (start + 1 < end) {
+        //try while (start + 0.0001 < end) {
         console.log(mid);
         mid = start + (end - start) / 2;
         if (mid * mid === x) {
@@ -36,7 +37,7 @@ var mySqrt = function(x) {
 
 // check:
 // console.log("Sqrt: ", mySqrt(4));
-// console.log("Sqrt: ", mySqrt(5));
+console.log("Sqrt: ", mySqrt(5));
 // console.log("Sqrt: ", mySqrt(8));
 // console.log("Sqrt: ", mySqrt(9));
 // console.log("Sqrt: ", mySqrt(10));
