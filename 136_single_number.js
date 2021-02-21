@@ -37,11 +37,18 @@ var singleNumber = function(nums) {
     //     return k;
     // }
 
-    // solution 4 - using common sense (fastest solution)
-    let set = [...new Set(nums)];
-    let set_sum = set.reduce((acc, n) => acc + n, 0);
-    let nums_sum = nums.reduce((acc, n) => acc + n, 0);
-    return set_sum * 2 - nums_sum;
+    // solution 4 - clever solution
+    // let set = [...new Set(nums)];
+    // let set_sum = set.reduce((acc, n) => acc + n, 0);
+    // let nums_sum = nums.reduce((acc, n) => acc + n, 0);
+    // return set_sum * 2 - nums_sum;
+
+    // solution 5 - using XOR (best solution O(n) runtime complexity w/o using memory)
+    let res = 0;
+    for (const n of nums) {
+        res ^= n;
+    }
+    return res;
 };
 
 console.log(singleNumber([4, 1, 2, 1, 2]));
