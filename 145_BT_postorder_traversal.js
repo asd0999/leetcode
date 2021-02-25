@@ -22,3 +22,22 @@ var helper = function(root, res) {
     helper(root.right, res);
     res.push(root.val);
 };
+
+// iterative solution
+var postorderTraversal = function(root) {
+    if (!root) return [];
+    let res = [];
+    let stack = [];
+    let node = root;
+    while (node || stack.length > 0) {
+        if (node) {
+            stack.push(node);
+            res.push(node.val); //or use res.unshift()
+            node = node.right;
+        } else {
+            node = stack.pop();
+            node = node.left;
+        }
+    }
+    return res.reverse();
+};
