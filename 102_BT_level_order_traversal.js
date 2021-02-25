@@ -52,7 +52,7 @@ var helper = function(res, root, level) {
 
 // ref: https://baffinlee.com/leetcode-javascript/problem/binary-tree-level-order-traversal.html
 
-// my solution - which doesnt give info about the levels
+// my solution - which doesnt give info about the levels by using nested arrays
 var levelOrder = function(root) {
     return helper([], root, 0);
 };
