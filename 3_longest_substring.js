@@ -22,11 +22,11 @@
 //     return g_max;
 // };
 
+// better solution
 var lengthOfLongestSubstring = function(s) {
     let max = 0;
     let current = 0;
     let seen = [];
-    // let str = s.split("");
     let start = 0;
     let done = false;
 
@@ -55,9 +55,10 @@ var lengthOfLongestSubstring = function(s) {
 };
 
 // test :
-console.log(lengthOfLongestSubstring("abcabcbb")); //3
-console.log(lengthOfLongestSubstring("adbcb")); //4
-console.log(lengthOfLongestSubstring("bbbb")); //1
-console.log(lengthOfLongestSubstring("pwwkew")); //3
-console.log(lengthOfLongestSubstring("dvdf")); //3
-console.log(lengthOfLongestSubstring("anviaj")); //5
+console.log("abcabcbb", lengthOfLongestSubstring("abcabcbb")); //3
+console.log("adbcb", lengthOfLongestSubstring("adbcb")); //4
+console.log("bbbb", lengthOfLongestSubstring("bbbb")); //1
+console.log("pwwkew", lengthOfLongestSubstring("pwwkew")); //3
+console.log("dvdf", lengthOfLongestSubstring("dvdf")); //3
+console.log("anviaj", lengthOfLongestSubstring("anviaj")); //5
+console.log("tmmzuxt", lengthOfLongestSubstring("tmmzuxt")); //5
