@@ -51,3 +51,18 @@ var helper = function(res, root, level) {
 };
 
 // ref: https://baffinlee.com/leetcode-javascript/problem/binary-tree-level-order-traversal.html
+
+// my solution - which doesnt give info about the levels
+var levelOrder = function(root) {
+    return helper([], root, 0);
+};
+
+var helper = function(res, root, level) {
+    if (root) {
+        if (!res[level]) res[level] = [];
+        res[level].push(root.val);
+        helper(res, root.left, level + 1);
+        helper(res, root.right, level + 1);
+    }
+    return res;
+};
