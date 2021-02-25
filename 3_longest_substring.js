@@ -2,51 +2,56 @@
  * @param {string} s
  * @return {number}
  */
+// brute force solution
+// var lengthOfLongestSubstring = function(s) {
+//     let array = s.split("");
+//     let l_max = 0;
+//     let g_max = 0;
+
+//     for (let i = 0; i < array.length; i++) {
+//         for (let j = i; j < array.length; j++) {
+//             let sub = array.slice(i, j + 1).join("");
+//             // console.log(sub);
+//             let set = new Set(sub);
+//             if (set.size === sub.length) {
+//                 l_max = sub.length;
+//                 if (l_max > g_max) g_max = l_max;
+//             }
+//         }
+//     }
+//     return g_max;
+// };
+
 var lengthOfLongestSubstring = function(s) {
-    if (!s) return 0;
+    let max = 0;
+    let current = 0;
+    let seen = [];
+    // let str = s.split("");
+    let start = 0;
+    let done = false;
 
-    let set = new Set();
-    let g_max = 0;
-    let l_max = 0;
-    let cur = "";
-
-    for (let i = 0; i < s.length; i++) {
-        // console.log("0", set);
-        cur = s[i];
-        if (!set.has(cur)) {
-            set.add(cur);
-            l_max++;
-            if (l_max > g_max) {
-                g_max = l_max;
-            }
-        }
-        // console.log("1", set);
-        for (let j = i + 1; j < s.length; j++) {
-            if (s[i] !== s[j] && !set.has(s[j])) {
-                l_max++;
-                set.add(s[j]);
-                // console.log("2", set);
+    while (start < s.length && !done) {
+        for (let i = start; i < s.length; i++) {
+            const char = s[i];
+            if (!seen.includes(char)) {
+                seen.push(char);
+                current++;
+                // console.log(seen);
+                if (i === s.length - 1) {
+                    done = true;
+                    max = Math.max(max, current);
+                }
             } else {
-                if (l_max > g_max) {
-                    g_max = l_max;
-                }
-                l_max = 0;
-                while (i < j) {
-                    if (s[i] === s[j]) {
-                        set.delete(s[i]);
-                        // console.log("3", set);
-                        break;
-                    }
-                    i++;
-                }
-                // console.log("4", set);
-            }
-            if (l_max > g_max) {
-                g_max = l_max;
+                max = Math.max(max, current);
+                current = 0;
+                start += seen.indexOf(char) + 1;
+                seen = [];
+                break;
             }
         }
     }
-    return g_max;
+
+    return max;
 };
 
 // test :
