@@ -23,34 +23,52 @@
 // };
 
 // better solution
+// var lengthOfLongestSubstring = function(s) {
+//     let max = 0;
+//     let current = 0;
+//     let seen = [];
+//     let start = 0;
+//     let done = false;
+
+//     while (start < s.length && !done) {
+//         for (let i = start; i < s.length; i++) {
+//             const char = s[i];
+//             if (!seen.includes(char)) {
+//                 seen.push(char);
+//                 current++;
+//                 // console.log(seen);
+//                 if (i === s.length - 1) {
+//                     done = true;
+//                     max = Math.max(max, current);
+//                 }
+//             } else {
+//                 max = Math.max(max, current);
+//                 current = 0;
+//                 start += seen.indexOf(char) + 1;
+//                 seen = [];
+//                 break;
+//             }
+//         }
+//     }
+
+//     return max;
+// };
+
+// best solution
 var lengthOfLongestSubstring = function(s) {
-    let max = 0;
-    let current = 0;
     let seen = [];
-    let start = 0;
-    let done = false;
+    let max = -Infinity;
 
-    while (start < s.length && !done) {
-        for (let i = start; i < s.length; i++) {
-            const char = s[i];
-            if (!seen.includes(char)) {
-                seen.push(char);
-                current++;
-                // console.log(seen);
-                if (i === s.length - 1) {
-                    done = true;
-                    max = Math.max(max, current);
-                }
-            } else {
-                max = Math.max(max, current);
-                current = 0;
-                start += seen.indexOf(char) + 1;
-                seen = [];
-                break;
-            }
+    for (let i = 0; i < s.length; i++) {
+        const char = s[i];
+        seenIndex = seen.indexOf(char);
+        if (seenIndex !== -1) {
+            max = Math.max(max, seen.length);
+            seen = seen.slice(seenIndex + 1);
         }
+        seen.push(char);
     }
-
+    max = Math.max(max, seen.length);
     return max;
 };
 
@@ -62,3 +80,4 @@ console.log("pwwkew", lengthOfLongestSubstring("pwwkew")); //3
 console.log("dvdf", lengthOfLongestSubstring("dvdf")); //3
 console.log("anviaj", lengthOfLongestSubstring("anviaj")); //5
 console.log("tmmzuxt", lengthOfLongestSubstring("tmmzuxt")); //5
+console.log("anviajanqwert", lengthOfLongestSubstring("anviajanqwert")); //8
