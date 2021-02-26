@@ -11,7 +11,7 @@ const complement = {
     "[": "]",
 };
 
-var isValid = function(s) {
+var isValid0 = function(s) {
     let openParentheses = [];
     let lastOpenParentheses = "";
     let parentheses = s.split("");
@@ -46,10 +46,33 @@ var isValid = function(s) {
     return lastOpenParentheses ? false : true;
 };
 
+//attempting a better solution using stack data structure
+var isValid = function(s) {
+    const comp = {
+        "(": ")",
+        "{": "}",
+        "[": "]",
+    };
+    let stack = [s[0]];
+    for (let i = 1; i < s.length; i++) {
+        let p = s[i];
+        if (comp[p] !== undefined) {
+            stack.push(p);
+        } else {
+            if (comp[stack[stack.length - 1]] === p) {
+                stack.pop();
+            } else {
+                return false;
+            }
+        }
+    }
+    return stack.length === 0 ? true : false;
+};
+
 // check :
-console.log(isValid("()"));
-console.log(isValid("({[}"));
-console.log(isValid("()[]{}"));
-console.log(isValid("(]"));
-console.log(isValid("([)]"));
-console.log(isValid("{[]}"));
+console.log(isValid("()")); // true
+console.log(isValid("({[}")); //false
+console.log(isValid("()[]{}")); //true
+console.log(isValid("(]")); //false
+console.log(isValid("([)]")); //false
+console.log(isValid("{[]}")); //true
