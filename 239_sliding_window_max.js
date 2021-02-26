@@ -4,23 +4,24 @@
  * @return {number[]}
  */
 // solution 1 - works but too slow (not acceptable)
-// var maxSlidingWindow = function(nums, k) {
-//     if (nums.length < k) return [];
+var maxSlidingWindow = function(nums, k) {
+    if (nums.length < k) return [];
+    // if (k === 1) return nums;
 
-//     let res = [];
-//     for (let i = 0; i < nums.length; i++) {
-//         let cur = null;
-//         let t = 0;
-//         while (t < k && i < nums.length - k + 1) {
-//             cur === null ? (cur = nums[i + t]) : (cur = Math.max(cur, nums[i + t]));
-//             t++;
-//         }
-//         if (cur) {
-//             res.push(cur);
-//         }
-//     }
-//     return res;
-// };
+    let res = [];
+    for (let i = 0; i < nums.length - k + 1; i++) {
+        let cur = null;
+        let t = 0;
+        while (t < k) {
+            cur === null ? (cur = nums[i + t]) : (cur = Math.max(cur, nums[i + t]));
+            t++;
+        }
+        if (cur) {
+            res.push(cur);
+        }
+    }
+    return res;
+};
 
 // solution 2 - also works, also too slow (kuso!!!!)
 var maxSlidingWindow = function(nums, k) {
