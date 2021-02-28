@@ -64,6 +64,7 @@ var LRUCache = function(capacity) {
     this.capacity = capacity;
     this.map = new Map();
     this.head = null;
+    this.tail = null;
 };
 
 /**
@@ -71,19 +72,31 @@ var LRUCache = function(capacity) {
  * @return {number}
  */
 LRUCache.prototype.get = function(key) {
+    // console.log(this.map);
     if (this.map.get(key)) {
         let cur = this.map.get(key);
         const value = cur.val;
-        if (this.head === cur) {
-            if (cur.next) {
-                let other = cur.next;
-                cur.prev = other;
-                other.prev = null;
-                other.next = cur;
-                cur.next = null;
-                this.head = other;
-            }
+        // console.log("tail: ", this.tail);
+        if (this.map.size === 1) {
+            return value;
         }
+        if (this.head === cur) {
+            this.head = this.head.next;
+            this.head.prev = null;
+        }
+        if (this.tail !== cur) {
+            if (cur.prev) {
+                cur.prev.next = cur.next;
+            }
+            if (cur.next) {
+                cur.next.prev = cur.prev;
+            }
+            this.tail.next = cur;
+            cur.prev = this.tail;
+            this.tail = cur;
+            cur.next = null;
+        }
+        console.log(">>>> ", this.map);
         return value;
     } else {
         return -1;
@@ -97,39 +110,54 @@ LRUCache.prototype.get = function(key) {
  */
 LRUCache.prototype.put = function(key, value) {
     let cur = this.map.get(key);
+    // console.log("whats is cur? ", cur);
     if (cur) {
-        const node = new Node(key, value);
-        this.map.set(key, node);
-        if (!this.head === cur) {
-            this.head.next = node;
-            node.prev = this.head;
-        } else {
-            if (cur.next) {
-                this.head = cur.next;
-                this.head.next = node;
-                node.prev = this.head;
-                this.head.prev = null;
-            } else {
-                this.head = node;
-            }
+        console.log(">>>> key exists, running update!");
+        cur.val = value;
+        if (cur.prev) {
+            cur.prev.next = cur.next || cur;
         }
-    } else if (this.map.size === this.capacity) {
-        this.map.delete(this.head.key);
-        this.head = this.head.next;
-        this.head.prev = null;
-        const node = new Node(key, value);
-        this.map.set(key, node);
-        this.head.next = node;
-        node.prev = this.head;
+        if (cur.next) {
+            cur.next.prev = cur.prev || cur;
+        }
+        if (this.head == cur && cur.next) {
+            this.head = cur.next;
+            this.head.prev = null;
+        }
+        if (this.tail !== cur) {
+            this.tail.next = cur;
+            cur.prev = this.tail;
+            this.tail = cur;
+            cur.next = null;
+        }
     } else {
         const node = new Node(key, value);
-        this.map.set(key, node);
-        if (!this.head) {
+        if (!this.tail) {
+            console.log(">>>> no head/tail, create first node");
             this.head = node;
+            this.tail = node;
+            this.map.set(key, node);
         } else {
-            this.head.next = node;
+            this.tail.next = node;
+            node.prev = this.tail;
+            this.tail = node;
+            this.map.set(key, node);
+            console.log(
+                ">>>> head/tail exists, adding to tail. map size: ",
+                this.map.size
+            );
+            if (this.map.size > this.capacity) {
+                this.map.delete(this.head.key);
+                this.head = this.head.next;
+                this.head.prev = null;
+                console.log(
+                    ">>>> but size > cap, deleting head, map size: ",
+                    this.map.size
+                );
+            }
         }
     }
+    // console.log(this.map);
     return this.head;
 };
 
@@ -153,9 +181,21 @@ LRUCache.prototype.put = function(key, value) {
 // console.log(obj.get(2));
 // console.log(obj.get(3));
 
-var obj = new LRUCache(1);
-console.log(obj.put(2, 1));
+var obj = new LRUCache(2);
+console.log(obj.put(1, 4));
+console.log(obj.put(1, 1));
+console.log(obj.put(2, 2));
+console.log(obj.get(1));
+console.log(obj.put(3, 3));
 console.log(obj.get(2));
-console.log(obj.put(3, 2));
-console.log(obj.get(2));
+console.log(obj.put(4, 4));
+console.log(obj.get(1));
 console.log(obj.get(3));
+console.log(obj.get(4));
+
+// var obj = new LRUCache(1);
+// console.log(obj.put(2, 1));
+// console.log(obj.get(2));
+// console.log(obj.put(3, 2));
+// console.log(obj.get(2));
+// console.log(obj.get(3));
