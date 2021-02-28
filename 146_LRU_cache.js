@@ -169,18 +169,19 @@ LRUCache.prototype.put = function(key, value) {
  */
 
 // test set 1:
-// var obj = new LRUCache(2);
-// console.log(obj.get(1));
-// console.log(obj.put(1, 2));
-// console.log(obj.put(1, 1));
-// console.log(obj.get(1));
-// console.log(obj.get(2));
-// console.log(obj.put(2, 2));
-// console.log(obj.put(3, 3));
-// console.log(obj.get(1));
-// console.log(obj.get(2));
-// console.log(obj.get(3));
+var obj = new LRUCache(2);
+console.log(obj.get(1));
+console.log(obj.put(1, 2));
+console.log(obj.put(1, 1));
+console.log(obj.get(1));
+console.log(obj.get(2));
+console.log(obj.put(2, 2));
+console.log(obj.put(3, 3));
+console.log(obj.get(1));
+console.log(obj.get(2));
+console.log(obj.get(3));
 
+// test set 2:
 var obj = new LRUCache(2);
 console.log(obj.put(1, 4));
 console.log(obj.put(1, 1));
@@ -193,9 +194,10 @@ console.log(obj.get(1));
 console.log(obj.get(3));
 console.log(obj.get(4));
 
-// var obj = new LRUCache(1);
-// console.log(obj.put(2, 1));
-// console.log(obj.get(2));
-// console.log(obj.put(3, 2));
-// console.log(obj.get(2));
-// console.log(obj.get(3));
+// test set 3:
+var obj = new LRUCache(1);
+console.log(obj.put(2, 1));
+console.log(obj.get(2));
+console.log(obj.put(3, 2));
+console.log(obj.get(2));
+console.log(obj.get(3));
