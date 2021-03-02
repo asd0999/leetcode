@@ -33,14 +33,13 @@ var topKFrequent = function(words, k) {
 
     for (let i = 0; i < freq.length; i++) {
         let f = freq[i];
-        if (result.length < k) {
-            if (obj2[f].length > 1) {
-                let tmp = obj2[f].sort();
-                result.push(...tmp);
-            } else {
-                result.push(obj2[f][0]);
-            }
+        if (obj2[f].length > 1) {
+            let tmp = obj2[f].sort();
+            result.push(...tmp);
         } else {
+            result.push(obj2[f][0]);
+        }
+        if (result.length >= k) {
             break;
         }
     }
