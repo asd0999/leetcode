@@ -22,6 +22,30 @@ var plusOne = function(digits) {
     return digits;
 };
 
+// alt solution - just cleaner
+var plusOne = function(digits) {
+    if (digits[digits.length - 1] < 9) {
+        digits[digits.length - 1] += 1;
+        return digits;
+    }
+
+    let carry = 1;
+    digits[digits.length - 1] = 0;
+    for (let i = digits.length - 2; i >= 0; i--) {
+        digits[i] += carry;
+        if (digits[i] > 9) {
+            digits[i] = 0;
+        } else {
+            break;
+        }
+    }
+    if (digits[0] === 0) {
+        digits.unshift(carry);
+    }
+
+    return digits;
+};
+
 // check :
 console.log(plusOne([9]));
 console.log(plusOne([9, 9]));
