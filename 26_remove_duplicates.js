@@ -3,15 +3,27 @@
  * @return {number}
  */
 var removeDuplicates = function(nums) {
-    for (let i = 0; i < nums.length; i++) {
-        if (i > 0) {
-            if (nums[i] == nums[i - 1]) {
-                let a = nums.splice(i, 1);
-                i--;
-            }
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] == nums[i - 1]) {
+            let a = nums.splice(i, 1);
+            i--;
         }
     }
     // console.log(nums);
+    return nums.length;
+};
+
+//solution 2 - without using splice method
+var removeDuplicates2 = function(nums) {
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] === nums[i - 1]) {
+            for (let j = i; j < nums.length - 1; j++) {
+                nums[j] = nums[j + 1];
+            }
+            nums.pop();
+            i--;
+        }
+    }
     return nums.length;
 };
 
