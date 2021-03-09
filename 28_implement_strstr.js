@@ -37,6 +37,15 @@ var strStr = function(haystack, needle) {
     return pos;
 };
 
+// solution 2 - not sure if this is cheating
+var strStr = function(haystack, needle) {
+    if (!haystack && needle) return -1;
+    if (!haystack && !needle) return 0;
+    if (haystack && !needle) return 0;
+    let b = haystack.split(needle);
+    return b[0].length === haystack.length ? -1 : b[0].length;
+};
+
 // check :
 console.log(strStr("hello", "")); //0
 console.log(strStr("hello", "mm")); //-1
