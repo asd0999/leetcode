@@ -18,6 +18,7 @@ var validate = function(root, min, max) {
     if (!root) {
         return true;
     } else if (
+        // important to check max/min !== null else second check will fail
         (max !== null && root.val >= max) ||
         (min !== null && root.val <= min)
     ) {
