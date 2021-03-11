@@ -69,30 +69,31 @@ var helper = function(res, root, level) {
 
 // my newest solution based on minDepth #111
 var levelOrder = function(root) {
-        if (!root) return [];
+    if (!root) return [];
 
-        let res = [];
-        let q = [];
-        q.push(root);
+    let res = [];
+    let q = [];
+    q.push(root);
 
-        while (q.length > 0) {
-            let nodes = q.length;
-            let level = [];
-            while (nodes > 0) {
-                let cur = q.shift();
-                // console.log(cur);
-                level.push(cur.val);
-                if (cur.left) {
-                    q.push(cur.left);
-                }
-                if (cur.right) {
-                    q.push(cur.right);
-                }
-                nodes--;
+    while (q.length > 0) {
+        let nodes = q.length;
+        let level = [];
+        while (nodes > 0) {
+            let cur = q.shift();
+            // console.log(cur);
+            level.push(cur.val);
+            if (cur.left) {
+                q.push(cur.left);
             }
-            // console.log(level);
-            res.push(level);
-            level = [];
+            if (cur.right) {
+                q.push(cur.right);
+            }
+            nodes--;
         }
+        // console.log(level);
+        res.push(level);
+        level = [];
+    }
 
-        return res;
+    return res;
+};
