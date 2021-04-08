@@ -53,6 +53,8 @@ var isValid = function(s) {
         "{": "}",
         "[": "]",
     };
+    if (!comp[s[0]]) return false;
+
     let stack = [s[0]];
     for (let i = 1; i < s.length; i++) {
         let p = s[i];
@@ -70,9 +72,10 @@ var isValid = function(s) {
 };
 
 // check :
-console.log(isValid("()")); // true
-console.log(isValid("({[}")); //false
-console.log(isValid("()[]{}")); //true
-console.log(isValid("(]")); //false
-console.log(isValid("([)]")); //false
-console.log(isValid("{[]}")); //true
+// console.log(isValid("()")); // true
+// console.log(isValid("({[}")); //false
+// console.log(isValid("()[]{}")); //true
+// console.log(isValid("(]")); //false
+// console.log(isValid("([)]")); //false
+// console.log(isValid("{[]}")); //true
+console.log(isValid("){[]}")); //true
